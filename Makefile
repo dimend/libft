@@ -38,6 +38,7 @@ SRCS = \
     ft_memcmp.c \
     ft_strlcpy.c \
     ft_strlcat.c \
+    ft_strcatrealloc.c \
     ft_substr.c \
     ft_strnstr.c \
     ft_calloc.c \
