@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcatrealloc.c                                 :+:      :+:    :+:   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 17:15:10 by dimendon          #+#    #+#             */
-/*   Updated: 2025/03/26 17:15:30 by dimendon         ###   ########.fr       */
+/*   Created: 2025/03/26 17:15:20 by dimendon          #+#    #+#             */
+/*   Updated: 2025/03/26 17:15:24 by dimendon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcatrealloc(char *src, const char *new)
+char	*ft_strtok(char *str, const char delim)
 {
-	char	*newdata;
-	int		src_len;
-	int		new_len;
+	static char	*input;
+	char		*start;
 
-	if (!src)
-		src_len = 0;
-	else
-		src_len = ft_strlen(src);
-	new_len = ft_strlen(new);
-	newdata = malloc(src_len + new_len + 1);
-	if (!newdata)
+	if (str)
+		input = str;
+	if (!input)
 		return (NULL);
-	if (src)
-		ft_memcpy(newdata, src, src_len);
-	ft_memcpy(newdata + src_len, new, new_len + 1);
-	free(src);
-	return (newdata);
+	while (*input != '\0' && *input == delim)
+		input++;
+	if (*input == '\0')
+		return (NULL);
+	start = input;
+	while (*input != '\0' && *input != delim)
+		input++;
+	if (*input == delim)
+	{
+		*input = '\0';
+		input++;
+	}
+	if (*input == '\0')
+		input = NULL;
+	return (start);
 }
